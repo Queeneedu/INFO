@@ -5,20 +5,20 @@ class Informant {
     input.position(this.width/2,this.height/2);
   }
 
-   button = createButton('submit');
-   button.position(input.x + input.width, 65);
-   button.mousePressed(greet);
-
-   greeting = createElement('h2', 'what is your name?');
-   greeting.position(20, 5);
-
-   textAlign(CENTER);
-   textSize(50);
+  send(){
+    button = createButton('Send')
+    button.position(width/2+70,height/2+50);
+    button.mousePressed(greet);
  }
 
- function greet() {
+ signalOut(){//아두이노에 시그널 보내기
+ }
+signalIn(){//아두이노 신호 받기
+}
+
+  enter() {
    const name = input.value();
-   greeting.html('hello ' + name + '!');
+   greeting.html(name);
    input.value('');
 
    for (let i = 0; i < 200; i++) {
@@ -30,3 +30,4 @@ class Informant {
      pop();
    }
  }
+}
