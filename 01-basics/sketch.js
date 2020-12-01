@@ -13,7 +13,7 @@ var boxB;
 var ground;
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(1920, 1080);
 
   // create an engine
   engine = Engine.create();
@@ -21,8 +21,8 @@ function setup() {
   // create two boxes and a ground
   boxA = Bodies.rectangle(200, 200, 80, 80);
   boxB = Bodies.rectangle(270, 50, 160, 80);
-  ground = Bodies.rectangle(400, 500, 810, 10, {
-    isStatic: true, angle: Math.PI * 0.06
+  ground = Bodies.rectangle(0, height, width, 10, {
+    isStatic: true
   });
 
   // add all of the bodies to the world
