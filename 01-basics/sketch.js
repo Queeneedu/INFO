@@ -1,5 +1,8 @@
 // Benedikt Groß
 // Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
+let informant;
+let importance;
+
 
 var Engine = Matter.Engine;
 var Render = Matter.Render;
@@ -14,16 +17,20 @@ var ground;
 
 function setup() {
   createCanvas(1920, 1080);
+  background(255);
+  informant = new Informant();
 
+    informant.send();
+    informant.enter();
   // create an engine
   engine = Engine.create();
 
   // create two boxes and a ground
   boxA = Bodies.rectangle(200, 200, 80, 80);
-  boxB = Bodies.rectangle(270, 50, 160, 80);
-  ground = Bodies.rectangle(0, height, width, 10, {
-    isStatic: true
-  });
+  boxB = Bodies.circle(270, 50, 10);
+  ground = Bodies.rectangle(0, height, width, 20,
+     {isStatic: true}
+   );
 
   // add all of the bodies to the world
   World.add(engine.world, [boxA, boxB, ground]);
@@ -41,6 +48,7 @@ function draw() {
 
   fill(128);
   drawVertices(ground.vertices);
+
 }
 
 function drawVertices(vertices) {
