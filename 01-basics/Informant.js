@@ -17,7 +17,7 @@ class Informant {
     button = createButton('Send');
     button.position(width/2, height/2 + 200);
     button.size(200,100);
-    button.mousePressed(sketch.Update);
+    button.mousePressed(Informant.Update);
   }
 
   Slider(){
