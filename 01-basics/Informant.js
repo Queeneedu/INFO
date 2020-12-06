@@ -27,9 +27,9 @@ class Informant {
     slider.style('height','100px');
   }
 
-  // Update(){
-  //   info.style("font-size", slider.value() + "pt");
-  //   info.html(typing.value());
-  //   //아두이노로 시작 신호 보내기
-  //   }
+  Update(){
+    info.style("font-size", slider.value() + "pt");
+    info.html(typing.value());
+    //아두이노로 시작 신호 보내기
+    }
  }
