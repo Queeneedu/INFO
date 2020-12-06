@@ -1,5 +1,4 @@
 let typing, button, slider, info;
-
 class Informant {
   constructor() {
   }
@@ -31,5 +30,13 @@ class Informant {
     info.style("font-size", slider.value() + "pt");
     info.html(typing.value());
     //아두이노로 시작 신호 보내기
+    }
+
+
+    Rest(){
+      textStyle(color(255,0,0));
+      textFont(myFont);
+      textSize(1000);
+      text('I NEED REST');
     }
  }

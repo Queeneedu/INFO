@@ -2,6 +2,7 @@
 // Example is based on examples from: http://brm.io/matter-js/, https://github.com/shiffman/p5-matter
 let informant;
 let importance;
+let myFont;
 
 
 var Engine = Matter.Engine;
@@ -15,7 +16,12 @@ var boxA;
 var boxB;
 var ground;
 
+function preload() {
+    myFont = loadFont('asset/BMOTF.otf');
+}
+
 function setup() {
+
   createCanvas(1920, 1080);
   background(255);
 
