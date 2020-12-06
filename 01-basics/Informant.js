@@ -1,31 +1,35 @@
+let typing, button, slider, info;
+
 class Informant {
   constructor() {
-    let input, button, greeting;
-    input = createInput();
-    input.position(width/2,height/2);
   }
 
-  send(){
-    button = createButton('Send')
-    button.position(width/2+70,height/2+50);
-    button.mousePressed(Informant.enter);
- }
- //
- // signalOut(){//아두이노에 시그널 보내기
- // }
- // signalIn(){//아두이노 신호 받기
- // }
+  Typing(){
+    typing = createInput('Enter Information');
+    typing.position(width/2-typing.width, height/2-200);
+    typing.size(500,100);
+    typing.style('font-size','50px');
 
-  enter() {
-   const name = input.value();
-   greeting.html(name);
-   input.value('');
+    info = createP('NO')
+  }
 
-     push();
-     fill(random(255), 255, 255);
-     translate(random(width), random(height));
-     rotate(random(2 * PI));
-     text(name, 0, 0);
-     pop();
+  SendButton(){
+    button = createButton('Send');
+    button.position(width/2, height/2 + 200);
+    button.size(200,100);
+    button.mousePressed(sketch.Update);
+  }
+
+  Slider(){
+    slider = createSlider(1,100,100); //(범위min,max,시작0)
+    slider.position(width/2,height/2);
+    slider.style('width','200px');
+    slider.style('height','100px');
+  }
+
+  // Update(){
+  //   info.style("font-size", slider.value() + "pt");
+  //   info.html(typing.value());
+  //   //아두이노로 시작 신호 보내기
+  //   }
  }
-}

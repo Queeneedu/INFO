@@ -17,27 +17,19 @@ function setup() {
   button = createButton('Send');
   button.position(width/2, height/2 + 200);
   button.size(200,100);
-  button.mousePressed(updateText);
+  button.mousePressed(update);
 
   //슬라이더
   slider = createSlider(1,100,1); //(범위min,max,시작0)
   slider.position(width/2,height/2);
   slider.style('width','200px');
   slider.style('height','100px');
-
-  // typing.input(updateText);
-  slider.input(updateSize);
-
-;
 }
 
-function updateSize(){
+function update(){
   info.style("font-size", slider.value() + "pt");
-}
-
-function updateText(){
-info.html(typing.value());
-
+  info.html(typing.value());
+//아두이노로 시작 신호 보내기
 }
 
   function draw(){
