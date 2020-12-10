@@ -1,5 +1,6 @@
 //Dom interface
 let typing, button, slider;
+let bbox;
 
 //변수 선언
 let info, infoSize;
@@ -27,7 +28,7 @@ function setup(){
   //informant
   state = 1;
   createCanvas(1920, 1080);
-  background(255,200,0);
+  background('#b7c0d7');
 
   //typing
   typing = createInput('Enter Information');
@@ -62,14 +63,14 @@ function setup(){
   World.add(world, groundA);
   World.add(world, groundB);
   World.add(world, groundC);
-  // Engine.run(engine);
+  Engine.run(engine);
 }
 
-//button and upload
+//upload and make bbox
 function upload(){
   info = typing.value();
   infoSize = map(slider.value(),1,50,10,100);
-  bbox = basicFont.textBounds(info, random(100,800), 0 ,infoSize);
+  bbox = basicFont.textBounds(info, random(600,1300), 0, infoSize);
   blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info));
   state = 2;
 }
@@ -83,7 +84,7 @@ function draw(){
   //upload text and fall
   else if (state == 2){
     //upload text and fall
-    background(255,200,0);
+    background('#b7c0d7');
     Engine.update(engine);
     for (var i = 0; i < blocks.length; i++) {
     blocks[i].show();
@@ -91,7 +92,8 @@ function draw(){
 
     //show ground
     noStroke(255);
-    fill(0);
+    rectMode(CENTER);
+    fill('#697cab');
     rect(groundA.position.x, groundA.position.y, width, 20);
     rect(groundB.position.x, groundB.position.y, 20, height);
     rect(groundC.position.x, groundC.position.y, 20, height);

@@ -1,5 +1,4 @@
-let cWidth;
-let bbox;
+
 function Block(x, y, w, h, infoT) {
   this.body = Bodies.rectangle(x, y, w, h);
   this.w = w;
@@ -9,19 +8,18 @@ function Block(x, y, w, h, infoT) {
   this.show = function() {
      var pos = this.body.position;
      var angle = this.body.angle;
-     // push();
-     // translate(pos.x, pos.y);
-     // rotate(angle);
+     push();
+     translate(pos.x, pos.y);
+     rotate(angle);
+     // fill(255);
+     // rect(0,0,w,h);
+
      rectMode(CENTER);
-     stroke(255);
-     fill(255);
-     rect(pos.x,pos.y,this.w,this.h);
-     fill(0);
-     noStroke();
+     fill('#87909A');
      textAlign(CENTER,CENTER);
      textFont(basicFont);
      textSize(this.h);
-     text(infoT, pos.x, pos.y);
-     // pop();
+     text(infoT, 0, 0);
+     pop();
   }
 }
