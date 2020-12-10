@@ -13,7 +13,7 @@ let Render = Matter.Render;
 let World = Matter.World;
 let Bodies = Matter.Bodies;
 let engine;
-let boxA, groundA,groundB, groundC;
+let groundA,groundB, groundC;
 
 
 //font load
@@ -52,27 +52,27 @@ function setup(){
 
   //Let's make the World
   engine = Engine.create();
-    world = engine.world;
-  var options = {
+  world = engine.world;
+  let options = {
      isStatic: true
    };
-  groundA = Bodies.rectangle(width/2, height, width, 20,options);
-  groundB = Bodies.rectangle(0,height/2, 10, height,options);
-  groundC = Bodies.rectangle(width,height/2,10,height,options);
+  groundA = Bodies.rectangle(width/2, height, width, 20, options);
+  groundB = Bodies.rectangle(0, height/2, 20, height, options);
+  groundC = Bodies.rectangle(width,height/2,20,height,options);
   World.add(world, groundA);
   World.add(world, groundB);
   World.add(world, groundC);
-  Engine.run(engine);
+  // Engine.run(engine);
 }
 
 //button and upload
 function upload(){
   info = typing.value();
-  infoSize = map(slider.value(),1,50,100,500);
-  blocks.push(new Block(width/2,0,infoSize,infoSize));
+  infoSize = map(slider.value(),1,50,10,100);
+  bbox = basicFont.textBounds(info, random(100,800), 0 ,infoSize);
+  blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info));
   state = 2;
 }
-
 
 function draw(){
 
@@ -92,10 +92,9 @@ function draw(){
     //show ground
     noStroke(255);
     fill(0);
-    rectMode(CENTER);
     rect(groundA.position.x, groundA.position.y, width, 20);
-    rect(groundB.position.x, groundB.position.y, 10, height);
-    rect(groundC.position.x, groundC.position.y, 10, height);
+    rect(groundB.position.x, groundB.position.y, 20, height);
+    rect(groundC.position.x, groundC.position.y, 20, height);
     }
   //INEEDREST
   else if (state == 3){
