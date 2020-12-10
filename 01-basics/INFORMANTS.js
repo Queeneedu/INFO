@@ -11,8 +11,6 @@ function setup() {
   typing.size(500,100);
   typing.style('font-size','50px');
 
-  info = createP('NO')
-
 //Sendbutton
   button = createButton('Send');
   button.position(width/2, height/2 + 200);
@@ -27,11 +25,23 @@ function setup() {
 }
 
 function update(){
-  info.style("font-size", slider.value() + "pt");
-  info.html(typing.value());
+  info = typing.value();
 //아두이노로 시작 신호 보내기
+  let infoBox = font.textBounds(info, width/3, height/2);
+  fill(255);
+  stroke(0);
+  rext(infoBox.x, infoBox.y, infoBox.w, infoBfox.h);
+  fill(0);
+  noStroke();
+  textFont('Shadows Into Light');
+  textSize(slider.value);
+  text(info,width/3,height/2);
 }
 
+
+
+
   function draw(){
+    //아두이노에서 신호받기 -> 정보 떨어지기
 
   }
