@@ -31,23 +31,23 @@ function setup(){
   background('#b7c0d7');
 
   //typing
-  typing = createInput('Enter Information');
-  typing.position(width/2-typing.width, height/2-200);
-  typing.size(500,100);
+  typing = createInput('당신의 정보를 입력하세요.슬라이더로 중요도를 조절하세요.');
+  typing.position(width/2-500, height/2-200);
+  typing.size(1000,100);
   //  typing.style('font','basicFont');
-  typing.style('font-size','60px');
+  typing.style('font-size','35px');
 
   //Sendbutton
   button = createButton('Send');
   //  button.style('font','basicFont');
   button.style('font-size','60px');
-  button.position(width/2, height/2 + 200);
+  button.position(width/2-100, height/2 + 200);
   button.size(200,100);
   button.mousePressed(upload);
 
   //slider
   slider = createSlider(1,100,1); //(min,max,start from 0)
-  slider.position(width/2,height/2);
+  slider.position(width/2-100,height/2);
   slider.style('width','200px');
   slider.style('height','100px');
 
@@ -69,10 +69,14 @@ function setup(){
 //upload and make bbox
 function upload(){
   info = typing.value();
-  infoSize = map(slider.value(),1,50,10,100);
+  infoSize = map(slider.value(),1,50,10,150);
   bbox = basicFont.textBounds(info, random(600,1300), 0, infoSize);
   blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info));
   state = 2;
+}
+
+function keyPressed(){
+  state=3;
 }
 
 function draw(){
@@ -100,10 +104,14 @@ function draw(){
     }
   //INEEDREST
   else if (state == 3){
-    textFont(restFont);
-    textSize(350);
-    fill(200,0,0);
-    textAlign(CENTER,CENTER);
-    text('INEEDAREST',width/2, height/2);
+    button.mousePressed(callRest);
   }
+}
+
+function callRest(){
+  textFont(restFont);
+  textSize(350);
+  fill(200,0,0);
+  textAlign(CENTER,CENTER);
+  text('INEEDAREST',width/2, height/2);
 }
