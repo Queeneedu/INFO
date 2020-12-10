@@ -1,93 +1,94 @@
-//Dom 인터페이스
+//Dom interface
 let typing, button, slider;
+
+//변수 선언
 let info, infoSize;
-let font;
-let colorBG;
+let restFont, basicFont;
 let state;
 
 //matter.js Class
-var Engine = Matter.Engine;
-var Render = Matter.Render;
-var World = Matter.World;
-var Bodies = Matter.Bodies;
+let Engine = Matter.Engine;
+let Render = Matter.Render;
+let World = Matter.World;
+let Bodies = Matter.Bodies;
+let engine;
+let boxA, ground;
 
 
-var engine;
-var boxA, ground;
-
+//font load
 function preload() {
-  font = loadFont('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/SangSangFlowerRoad.woff');
+  basicFont = loadFont('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/HeirofLightBold.woff');
+  restFont = loadFont('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSGothic.woff');
 }
+
 
 function setup(){
-    state = 1;
-    colorBG = color(0,0,255);
-    createCanvas(1920, 1080);
-    background(255,200,0);
+  //informant
+  state = 1;
+  createCanvas(1920, 1080);
+  background(255,200,0);
 
   //typing
-    textAlign(CENTER,CENTER);
-    typing = createInput('Enter Information');
-    typing.position(width/2-typing.width, height/2-200);
-    typing.size(500,100);
-    typing.style('font-size','50px');
+  typing = createInput('Enter Information');
+  typing.position(width/2-typing.width, height/2-200);
+  typing.size(500,100);
+  //  typing.style('font','basicFont');
+  typing.style('font-size','60px');
 
   //Sendbutton
-    button = createButton('Send');
-    button.position(width/2, height/2 + 200);
-    button.size(200,100);
-    button.mousePressed(update);
+  button = createButton('Send');
+  //  button.style('font','basicFont');
+  button.style('font-size','60px');
+  button.position(width/2, height/2 + 200);
+  button.size(200,100);
+  button.mousePressed(upload);
 
-    //슬라이더
-    slider = createSlider(1,100,1); //(범위min,max,시작0)
-    slider.position(width/2,height/2);
-    slider.style('width','200px');
-    slider.style('height','100px');
+  //slider
+  slider = createSlider(1,100,1); //(min,max,start from 0)
+  slider.position(width/2,height/2);
+  slider.style('width','200px');
+  slider.style('height','100px');
 
-
-    engine = Engine.create();
-    boxA = Bodies.rectangle(500,0, 100, 200);
-    ground = Bodies.rectangle(0, height, width, 20,
+  //Let's make the World
+  engine = Engine.create();
+  boxA = Bodies.rectangle(500,0, 100, 200);
+  ground = Bodies.rectangle(0, height, width, 20,
        {isStatic: true}
      );
-     World.add(engine.world, [boxA, ground]); //박스는 나중에 추가하기
-    Engine.run(engine);
+  World.add(engine.world, [boxA, ground]); //박스는 나중에 추가하기
+  Engine.run(engine);
 }
 
-function update(){
+//button and upload
+function upload(){
   info = typing.value();
   infoSize = slider.value();
-  state = 2;
+  state = 3;
 }
 
 
 function draw(){
-  background(colorBG);
+
+  //informant
   if (state == 1){
-    colorBG = color(255,0,0);
   }
+
+  //upload text and fall
   else if (state == 2){
-    colorBG = color(0,255,0);
-    // textBox();
     fill(255);
     drawVertices(boxA.vertices);
     fill(128);
     drawVertices(ground.vertices);
   }
-}
 
-function textBox(){
-  textAlign(CENTER);
-  let bbox = font.textBounds(info, width/2, height/2,infoSize,CENTER,CENTER);
-  fill(255);
-  stroke(0);
-  rect(bbox.x, bbox.y, bbox.w, bbox.h);
-  fill(0);
-  noStroke();
-
-  textFont(font);
-  textSize(infoSize);
-  text(info, width/2, height/2);
+  //INEEDREST
+  else if (state == 3){
+    textFont(restFont);
+    textSize(350);
+    fill(200,0,0);
+    textAlign(CENTER,CENTER);
+    text('INEEDAREST',width/2, height/2);
+  }
 }
 
 function drawVertices(vertices) {
