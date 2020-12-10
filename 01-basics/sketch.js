@@ -5,6 +5,7 @@ let typing, button, slider;
 let info, infoSize;
 let restFont, basicFont;
 let state;
+let blocks=[];
 
 //matter.js Class
 let Engine = Matter.Engine;
@@ -12,9 +13,8 @@ let Render = Matter.Render;
 let World = Matter.World;
 let Bodies = Matter.Bodies;
 let engine;
-let world;
-let groundA,groundB,groundC;
-let blocks = [];
+let boxA, groundA,groundB, groundC;
+
 
 //font load
 function preload() {
@@ -24,7 +24,6 @@ function preload() {
 
 
 function setup(){
-
   //informant
   state = 1;
   createCanvas(1920, 1080);
@@ -34,20 +33,22 @@ function setup(){
   typing = createInput('Enter Information');
   typing.position(width/2-typing.width, height/2-200);
   typing.size(500,100);
+  //  typing.style('font','basicFont');
   typing.style('font-size','60px');
 
   //Sendbutton
   button = createButton('Send');
+  //  button.style('font','basicFont');
   button.style('font-size','60px');
   button.position(width/2, height/2 + 200);
   button.size(200,100);
   button.mousePressed(upload);
 
   //slider
-  slider = createSlider(1,200,100); //(min,max,start from 0)
-  slider.position(width/2-100, height/2+30);
-  slider.style('width','400px');
-  slider.style('height','50px');
+  slider = createSlider(1,100,1); //(min,max,start from 0)
+  slider.position(width/2,height/2);
+  slider.style('width','200px');
+  slider.style('height','100px');
 
   //Let's make the World
   engine = Engine.create();
@@ -70,24 +71,19 @@ function setup(){
 //button and upload
 function upload(){
   info = typing.value();
-  infoSize = map(slider.value(),1,100,100,500);
-  blocks.push(new Block(width/2,0,infoSize,infoSize/2));
+  infoSize = map(slider.value(),1,50,100,500);
+  blocks.push(new Block(0,0,infoSize,infoSize));
   state = 2;
 }
 
-// function MakeBox(){
-//   boxA = Bodies.rectangle(500,0, 100, 200);
-
-//   World.add(engine.world, [boxA, ground]); //박스는 나중에 추가하기
-//   Engine.run(engine);
-// }
 
 function draw(){
+
   //informant
   if (state == 1){
   }
 
-
+  //upload text and fall
   else if (state == 2){
     //upload text and fall
     background(255,200,0);
@@ -98,13 +94,12 @@ function draw(){
 
     //show ground
     noStroke(255);
-    fill(255);
+    fill(0);
     rectMode(CENTER);
     rect(groundA.position.x, groundA.position.y, width, 20);
     rect(groundB.position.x, groundB.position.y, 10, height);
     rect(groundC.position.x, groundC.position.y, 10, height);
     }
-
   //INEEDREST
   else if (state == 3){
     textFont(restFont);
