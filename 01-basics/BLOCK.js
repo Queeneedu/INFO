@@ -14,6 +14,7 @@ var engine;
 
 var boxA;
 var boxB;
+var boxC;
 var ground;
 
 function preload() {
@@ -28,14 +29,15 @@ function setup() {
   engine = Engine.create();
 
   // create two boxes and a ground
-  boxA = Bodies.rectangle(200, 200, 80, 80);
+  boxA = Bodies.rectangle(500,0, 10, 80);
   boxB = Bodies.circle(270, 50, 10);
+  boxC = Bodies.rectangle(500,50,50,10);
   ground = Bodies.rectangle(0, height, width, 20,
      {isStatic: true}
    );
 
   // add all of the bodies to the world
-  World.add(engine.world, [boxA, boxB, ground]);
+  World.add(engine.world, [boxA, boxB,boxC, ground]);
 
   // run the engine
   Engine.run(engine);
@@ -47,6 +49,7 @@ function draw() {
   fill(255);
   drawVertices(boxA.vertices);
   drawVertices(boxB.vertices);
+  drawVertices(boxC.vertices);
 
   fill(128);
   drawVertices(ground.vertices);

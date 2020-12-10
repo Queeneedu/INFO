@@ -1,11 +1,15 @@
-let typing, button, slider, info;
+let typing, button, slider, info,font;
 
+function preload() {
+  font = loadFont('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/SangSangFlowerRoad.woff');
+}
 
 function setup() {
   // createInput Button
   createCanvas(1920, 1080,WEBGL);
   background(200);
 //typing
+  textAlign(CENTER,CENTER);
   typing = createInput('Enter Information');
   typing.position(width/2-typing.width, height/2-200);
   typing.size(500,100);
@@ -26,16 +30,7 @@ function setup() {
 
 function update(){
   info = typing.value();
-//아두이노로 시작 신호 보내기
-  let infoBox = font.textBounds(info, width/3, height/2);
-  fill(255);
-  stroke(0);
-  rext(infoBox.x, infoBox.y, infoBox.w, infoBfox.h);
-  fill(0);
-  noStroke();
-  textFont('Shadows Into Light');
-  textSize(slider.value);
-  text(info,width/3,height/2);
+  infoSize = slider.value();
 }
 
 
