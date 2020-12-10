@@ -33,10 +33,10 @@ class Informant {
     }
 
 
-    Rest(){
-      textStyle(color(255,0,0));
-      textFont(myFont);
-      textSize(1000);
-      text('I NEED REST');
-    }
+    // Rest(){
+    //   textStyle(color(255,0,0));
+    //   textFont(myFont);
+    //   textSize(1000);
+    //   text('I NEED REST');
+    // }
  }

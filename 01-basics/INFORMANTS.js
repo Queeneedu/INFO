@@ -6,8 +6,8 @@ function preload() {
 
 function setup() {
   // createInput Button
-  createCanvas(1920, 1080,WEBGL);
-  background(200);
+  createCanvas(1920, 1080);
+  background(255,200,0);
 //typing
   textAlign(CENTER,CENTER);
   typing = createInput('Enter Information');
@@ -33,10 +33,24 @@ function update(){
   infoSize = slider.value();
 }
 
+function textBox(){
+  background(255,200,0);
+  textAlign(CENTER,CENTER);
+   let bbox = font.textBounds(info, 50,50, infoSize ,CENTER,CENTER);
+//   fill(255);
+  stroke(255);
+
+   rect(bbox.x, bbox.y, bbox.w, bbox.h);
+
+
+   textFont(font);
+   textSize(infoSize);
+   text(info, 50, 50);
+}
+
 
 
 
   function draw(){
     //아두이노에서 신호받기 -> 정보 떨어지기
-
   }
