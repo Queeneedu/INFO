@@ -1,4 +1,3 @@
-
 function Block(x, y, w, h) {
   this.body = Bodies.rectangle(x, y, w, h);
   this.w = w;

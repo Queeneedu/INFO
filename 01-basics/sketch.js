@@ -52,27 +52,24 @@ function setup(){
 
   //Let's make the World
   engine = Engine.create();
-  world = engine.world;
-  Engine.run(engine);
-
-  //ground and wall
+    world = engine.world;
   var options = {
-    isStatic: true
-  };
-  groundA = Bodies.rectangle(width/2, height, width, 10, options);
-  groundB = Bodies.rectangle(0, height/2, 10, height, options);
-  groundC = Bodies.rectangle(width, height/2, 10, height, options);
-
+     isStatic: true
+   };
+  groundA = Bodies.rectangle(width/2, height, width, 20,options);
+  groundB = Bodies.rectangle(0,height/2, 10, height,options);
+  groundC = Bodies.rectangle(width,height/2,10,height,options);
   World.add(world, groundA);
   World.add(world, groundB);
   World.add(world, groundC);
+  Engine.run(engine);
 }
 
 //button and upload
 function upload(){
   info = typing.value();
   infoSize = map(slider.value(),1,50,100,500);
-  blocks.push(new Block(0,0,infoSize,infoSize));
+  blocks.push(new Block(width/2,0,infoSize,infoSize));
   state = 2;
 }
 
