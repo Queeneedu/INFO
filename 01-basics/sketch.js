@@ -57,9 +57,9 @@ function setup(){
   let options = {
      isStatic: true
    };
-  groundA = Bodies.rectangle(width/2, height, width, 20, options);
-  groundB = Bodies.rectangle(0, height/2, 20, height, options);
-  groundC = Bodies.rectangle(width,height/2,20,height,options);
+  groundA = Bodies.rectangle(width/2, height, width, 1, options);
+  groundB = Bodies.rectangle(0, height/2, 1, height, options);
+  groundC = Bodies.rectangle(width,height/2,1,height,options);
   World.add(world, groundA);
   World.add(world, groundB);
   World.add(world, groundC);
@@ -69,42 +69,54 @@ function setup(){
 //upload and make bbox
 function upload(){
   info = typing.value();
-  infoSize = map(slider.value(),1,50,10,150);
+  infoSize = map(slider.value(),1,50,10,100);
   bbox = basicFont.textBounds(info, random(600,1300), 0, infoSize);
-  blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info));
+  blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info,infoSize));
   state = 2;
 }
 
-function keyPressed(){
-  state=3;
-}
+
+
 
 function draw(){
+  //show ground
+  noStroke(255);
+  rectMode(CENTER);
+  fill('#697cab');
+  rect(groundA.position.x, groundA.position.y, width, 1);
+  rect(groundB.position.x, groundB.position.y, 1, height);
+  rect(groundC.position.x, groundC.position.y, 1, height);
 
   //informant
   if (state == 1){
+    background('#b7c0d7');
+    button.mousePressed(upload);
   }
 
   //upload text and fall
   else if (state == 2){
-    //upload text and fall
     background('#b7c0d7');
     Engine.update(engine);
     for (var i = 0; i < blocks.length; i++) {
     blocks[i].show();
+    if (blocks[i].reachBoundary()){
+      state = 3;
+      }
     }
-
-    //show ground
-    noStroke(255);
-    rectMode(CENTER);
-    fill('#697cab');
-    rect(groundA.position.x, groundA.position.y, width, 20);
-    rect(groundB.position.x, groundB.position.y, 20, height);
-    rect(groundC.position.x, groundC.position.y, 20, height);
-    }
+  }
   //INEEDREST
   else if (state == 3){
     button.mousePressed(callRest);
+    for (let i = 0; i<blocks.length ; i++){
+      blocks[i].disappear();
+      blocks.splice(i,1);
+      i--;
+    }
+      if (i == 0) {
+        state = 1;
+      } else {
+        state = 3;
+      }
   }
 }
 
