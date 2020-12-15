@@ -1,3 +1,6 @@
+//시리얼
+let serial;
+let num;
 //Dom interface
 let typing, button, slider;
 let bbox;
@@ -7,6 +10,7 @@ let info, infoSize;
 let restFont, basicFont;
 let state;
 let blocks=[];
+let life;
 
 //matter.js Class
 let Engine = Matter.Engine;
@@ -25,6 +29,12 @@ function preload() {
 
 
 function setup(){
+  //시리얼
+  serial = new p5.SerialPort();
+  serial.open('COM3');
+
+
+  life = 0;
   //informant
   state = 1;
   createCanvas(1920, 1080);
@@ -57,9 +67,10 @@ function setup(){
   let options = {
      isStatic: true
    };
-  groundA = Bodies.rectangle(width/2, height, width, 1, options);
-  groundB = Bodies.rectangle(0, height/2, 1, height, options);
-  groundC = Bodies.rectangle(width,height/2,1,height,options);
+
+  groundA = Bodies.rectangle(width/2, height, width, 20, options);
+  groundB = Bodies.rectangle(0, height/2, 20, height, options);
+  groundC = Bodies.rectangle(width,height/2,20,height,options);
   World.add(world, groundA);
   World.add(world, groundB);
   World.add(world, groundC);
@@ -73,9 +84,10 @@ function upload(){
   bbox = basicFont.textBounds(info, random(600,1300), 0, infoSize);
   blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info,infoSize));
   state = 2;
+  num = 1;
+  serial.write(num);
+  console.log(num);
 }
-
-
 
 
 function draw(){
@@ -98,28 +110,20 @@ function draw(){
     background('#b7c0d7');
     Engine.update(engine);
     for (var i = 0; i < blocks.length; i++) {
-    blocks[i].show();
-    if (blocks[i].reachBoundary()){
-      state = 3;
+      blocks[i].show();
+      if (blocks[i].reachBoundary()){
+        state = 3;
       }
     }
   }
   //INEEDREST
   else if (state == 3){
     button.mousePressed(callRest);
-    for (let i = 0; i<blocks.length ; i++){
-      blocks[i].disappear();
-      blocks.splice(i,1);
-      i--;
-    }
-      if (i == 0) {
-        state = 1;
-      } else {
-        state = 3;
       }
-  }
-}
+    }
 
+
+//call rest
 function callRest(){
   textFont(restFont);
   textSize(350);
