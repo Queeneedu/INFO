@@ -30,8 +30,8 @@ function preload() {
 
 function setup(){
   //시리얼
-  serial = new p5.SerialPort();
-  serial.open('COM3');
+  // serial = new p5.SerialPort();
+  // serial.open('COM3');
 
 
   life = 0;
