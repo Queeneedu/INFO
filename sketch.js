@@ -30,8 +30,8 @@ function preload() {
 
 function setup(){
   //시리얼
-  // serial = new p5.SerialPort();
-  // serial.open('COM3');
+ serial = new p5.SerialPort();
+ serial.open('COM3');
 
 
   life = 0;
@@ -53,7 +53,7 @@ function setup(){
   button.style('font-size','60px');
   button.position(width/2-100, height/2 + 200);
   button.size(200,100);
-  button.mousePressed(upload);
+  button.mouseClicked(upload);
 
   //slider
   slider = createSlider(1,100,1); //(min,max,start from 0)
@@ -85,8 +85,8 @@ function upload(){
   blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info,infoSize));
   state = 2;
   num = 1;
-  serial.write(num);
-  console.log(num);
+  serial.write(1);
+  console.log(1);
 }
 
 
@@ -102,7 +102,7 @@ function draw(){
   //informant
   if (state == 1){
     background('#b7c0d7');
-    button.mousePressed(upload);
+    button.mouseClicked(upload);
   }
 
   //upload text and fall
@@ -118,7 +118,7 @@ function draw(){
   }
   //INEEDREST
   else if (state == 3){
-    button.mousePressed(callRest);
+    button.mouseClicked(callRest);
       }
     }
 
@@ -130,4 +130,6 @@ function callRest(){
   fill(200,0,0);
   textAlign(CENTER,CENTER);
   text('INEEDAREST',width/2, height/2);
+  serial.write(2);
+  console.log(2);
 }
