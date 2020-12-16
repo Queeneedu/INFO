@@ -20,11 +20,8 @@ function Block(x, y, w, h, infoT,lifeSpan) {
       textSize(this.h);
       text(infoT, 0, 0);
       pop();
-
-      if (this.reachBoundary()){
-        lifeSpan = lifeSpan-1;
       }
-    }
+
 
     this.reachBoundary = function(){
       let pos = this.body.position;

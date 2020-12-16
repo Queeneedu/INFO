@@ -11,6 +11,7 @@ let restFont, basicFont;
 let state;
 let blocks=[];
 let life;
+let time;
 
 //matter.js Class
 let Engine = Matter.Engine;
@@ -29,12 +30,13 @@ function preload() {
 
 
 function setup(){
+  //타이머
+  time = millis();
+
   //시리얼
- serial = new p5.SerialPort();
- serial.open('COM3');
+  serial = new p5.SerialPort();
+  serial.open('COM3');
 
-
-  life = 0;
   //informant
   state = 1;
   createCanvas(1920, 1080);
@@ -79,16 +81,18 @@ function setup(){
 
 //upload and make bbox
 function upload(){
+  serial.write(1);
+  console.log(1);
+  time = millis();
+  if (millis()>time+1000){
   info = typing.value();
   infoSize = map(slider.value(),1,50,10,100);
   bbox = basicFont.textBounds(info, random(600,1300), 0, infoSize);
   blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info,infoSize));
   state = 2;
   num = 1;
-  serial.write(1);
-  console.log(1);
+  }
 }
-
 
 function draw(){
   //show ground
@@ -116,20 +120,21 @@ function draw(){
       }
     }
   }
-  //INEEDREST
+  //INEEDAREST
   else if (state == 3){
     button.mouseClicked(callRest);
-      }
-    }
-
-
+    for (var i = 0; i < blocks.length; i++) {
+      blocks[i].disappear();
+  }
+}
+}
 //call rest
 function callRest(){
+  serial.write(2);
+  console.log(2);
   textFont(restFont);
   textSize(350);
   fill(200,0,0);
   textAlign(CENTER,CENTER);
   text('INEEDAREST',width/2, height/2);
-  serial.write(2);
-  console.log(2);
 }
