@@ -35,7 +35,7 @@ function setup(){
 
   //시리얼
   serial = new p5.SerialPort();
-  serial.open('COM3');
+  serial.open('COM7');
 
   //informant
   state = 1;
@@ -83,15 +83,15 @@ function setup(){
 function upload(){
   serial.write(1);
   console.log(1);
-  time = millis();
-  if (millis()>time+1000){
+  setTimeout(function(){
   info = typing.value();
   infoSize = map(slider.value(),1,50,10,100);
   bbox = basicFont.textBounds(info, random(600,1300), 0, infoSize);
   blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info,infoSize));
-  state = 2;
+  state=2;
+  },2000);
+
   num = 1;
-  }
 }
 
 function draw(){
