@@ -89,7 +89,7 @@ function upload(){
   bbox = basicFont.textBounds(info, random(600,1300), 0, infoSize);
   blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info,infoSize));
   state=2;
-  },2000);
+},1500);
 
   num = 1;
 }
