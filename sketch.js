@@ -83,14 +83,13 @@ function setup(){
 function upload(){
   serial.write(1);
   console.log(1);
-  setTimeout(function(){
+  // setTimeout(function(){
   info = typing.value();
   infoSize = map(slider.value(),1,50,10,100);
   bbox = basicFont.textBounds(info, random(600,1300), 0, infoSize);
   blocks.push(new Block(bbox.x, bbox.y, bbox.w, bbox.h, info,infoSize));
   state=2;
-},1500);
-
+// },1500);
   num = 1;
 }
 
